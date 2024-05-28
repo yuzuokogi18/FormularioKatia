@@ -4,6 +4,7 @@ import Lista from '../molecules/Lista';
 import Button from '../atoms/Button';
 import Text from '../atoms/Text';
 import Stack from '../../data/Stack';
+import ProductListItem from '../molecules/ProductListItem';
 import './Section1.css';
 
 function Section1() {
@@ -70,19 +71,6 @@ function Section1() {
     setShowProductList(true);
   };
 
-  const renderProductsList = () => {
-    const productsArray = products;
-    const productsList = [];
-    for (let i = 0; i < productsArray.length; i++) {
-      productsList.push(
-        <li key={i}>
-          Nombre del producto: {productsArray[i].productName}, ID: {productsArray[i].productId}, Cantidad: {productsArray[i].quantity}, Fecha: {productsArray[i].registrationDate}, Marca: {productsArray[i].brand}
-        </li>
-      );
-    }
-    return productsList;
-  };
-
   return (
     <>
       <div id="Conteiner">
@@ -98,7 +86,9 @@ function Section1() {
         <Button title="Mostrar Lista de Productos" onclick={handleShowListClick} />
         {showProductList && (
           <ul>
-            {renderProductsList()}
+            {products.map((product, index) => (
+              <ProductListItem key={index} product={product} />
+            ))}
           </ul>
         )}
       </div>
